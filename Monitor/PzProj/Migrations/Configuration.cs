@@ -9,7 +9,7 @@ namespace PzProj.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(PzProj.Models.PzProjContext context)

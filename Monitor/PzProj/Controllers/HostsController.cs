@@ -35,70 +35,6 @@ namespace PzProj.Controllers
             return Ok(hosts);
         }
 
-        // PUT api/Hosts/5
-        public IHttpActionResult PutHosts(int id, Hosts hosts)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != hosts.id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(hosts).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!HostsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST api/Hosts
-        [ResponseType(typeof(Hosts))]
-        public IHttpActionResult PostHosts(Hosts hosts)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Hosts.Add(hosts);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = hosts.id }, hosts);
-        }
-
-        // DELETE api/Hosts/5
-        [ResponseType(typeof(Hosts))]
-        public IHttpActionResult DeleteHosts(int id)
-        {
-            Hosts hosts = db.Hosts.Find(id);
-            if (hosts == null)
-            {
-                return NotFound();
-            }
-
-            db.Hosts.Remove(hosts);
-            db.SaveChanges();
-
-            return Ok(hosts);
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -107,11 +43,6 @@ namespace PzProj.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool HostsExists(int id)
-        {
-            return db.Hosts.Count(e => e.id == id) > 0;
         }
     }
 }

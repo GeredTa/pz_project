@@ -1,3 +1,4 @@
 *.suo
 Monitor/PzProj/obj/*
 Monitor/PzProj/bin/*
+packages/*

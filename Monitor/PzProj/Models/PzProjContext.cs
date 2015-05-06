@@ -16,7 +16,7 @@ namespace PzProj.Models
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
 
         public PzProjContext()
-            : base("name=PzProjContext")
+            : base("PzProjContext")
         {
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
@@ -24,6 +24,21 @@ namespace PzProj.Models
         public System.Data.Entity.DbSet<PzProj.Models.Users> Users { get; set; }
 
         public System.Data.Entity.DbSet<PzProj.Models.Hosts> Hosts { get; set; }
-        
+        public System.Data.Entity.DbSet<PzProj.Models.Measurements> Measurements { get; set; }
+        public System.Data.Entity.DbSet<PzProj.Models.MeasurTypes> MeasurTypes { get; set; }
+
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Measurements>().HasRequired(m => m.host);
+            modelBuilder.Entity<Measurements>().HasRequired(m => m.type);
+
+        }
+
     }
+
+
+
+
 }
